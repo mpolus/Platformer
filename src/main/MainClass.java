@@ -1,7 +1,10 @@
 package main;
 
-public class main {
-    public static void main(String[] args) {
-        
-    }
+public class MainClass {
+
+	public static void main(String[] args) {
+		new Game();
+
+	}
+
 }
