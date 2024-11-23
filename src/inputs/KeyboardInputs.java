@@ -16,12 +16,14 @@ public class KeyboardInputs implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		System.out.println("KeyTyped " + e.getKeyChar());
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		System.out.println("KeyReleased " + e.getKeyChar());
 		// TODO Auto-generated method stub
 
 	}
