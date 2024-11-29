@@ -6,9 +6,13 @@ package entities;
 public abstract class Entity {
 
     // TODO: create 2 floats for x and y as protected fields.
+    protected float x;
+    protected float y;
 
     public Entity (float x, float y){
         // TODO: assign each of the parameters to their appropriate fields.
+        this.x = x;
+        this.y = y;
     }
 
 }

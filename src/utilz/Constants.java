@@ -1,8 +1,6 @@
 package utilz;
 
 public class Constants {
-    // TODO: Nothing to do on this one, just something to read and learn from.
-    // You can organize Constants into categories by using static inner classes.
     // That way to access a constant you can say Constants.Direction.LEFT, etc.
     public static class Directions {
         public static final int Left = 0;
@@ -26,8 +24,6 @@ public class Constants {
 
 
         public static int GetSpriteAmount(int player_action){
-            // TODO: Note:  the cases without a return are meant to fall through to the first one with a return.
-            // not a mistake.
             switch(player_action) {
                 case RUNNING:
                     return 6;
