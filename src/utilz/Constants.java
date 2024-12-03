@@ -1,9 +1,8 @@
 package utilz;
 
 public class Constants {
-    // That way to access a constant you can say Constants.Direction.LEFT, etc.
     public static class Directions {
-        public static final int Left = 0;
+        public static final int LEFT = 0;
         public static final int UP = 1;
         public static final int RIGHT = 2;
         public static final int DOWN = 3;
