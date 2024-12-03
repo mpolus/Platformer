@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static utilz.Constants.PlayerConstants.*;
+
 public class Player extends Entity {
 
     // TODO: Note: The animations currently exist in GamePanel.  They are finding a new home here
@@ -21,13 +23,15 @@ public class Player extends Entity {
     // This is a bit of an early topic, but its like a list that contains lists.  The first list if the row, the ones inside are the
     // columns.  This will handle the animations.
     private BufferedImage[][] animations;
-    // TODO: These new fields are just private
-    // TODO: create an int named aniTick, aniIndex, and aniSpeed and initialize aniSpeed to 25;
-    // TODO: create an int named playerAction and initialize to IDLE (this comes from the Constants file imported above)
-    // TODO: create a boolean named moving and initialize to false.
-    // TODO: create a boolean named attacking and initialize to false.
-    // TODO: create boolean's named left, up, right, and down
-    // TODO: create a float named playerSpeed and initialize to 2.0f;
+    private int aniTick, aniIndex, aniSpeed = 25;
+    private int playerAction = IDLE;
+    private boolean moving = false;
+    private boolean attacking = false;
+    private boolean left = false;
+    private boolean right = false;
+    private boolean up = false;
+    private boolean down = false;
+    private float playerSpeed = 2.0f;
 
     public Player(float x, float y) {
         super(x, y);
@@ -50,46 +54,59 @@ public class Player extends Entity {
     }
 
     private void updateAnimationTick() {
-        // TODO: Note: this is more or less the clock for the animations.  It handles the pose cycle
-        // TODO: add 1 to aniTick with ++
-        // TODO: if aniTick >= aniSpeed.
-        // TODO: The rest of this method is all in the if block started at previous line.
-        // TODO: set aniTick to 0
-        // TODO: add 1 to aniIndex with ++
-        // TODO: if aniIndex >= GetSpriteAmount(playerAction)
-        // TODO: inside this if statement set aniIndex to 0
-        // TODO: set attacking to false;
-        // TODO: This is easy to mess up.  You'll have an if in and if at the end of the day.
+        aniTick++;
+        if (aniTick >= aniSpeed){
+            aniTick = 0;
+            aniIndex++;
+            if (aniIndex >= GetSpriteAmount(playerAction)) {
+                aniIndex = 0;
+                if (attacking){
+                    attacking = false;
+                }
+            }
+        }
     }
 
     private void setAnimation(){
-        // TODO: create an int named startAni and initialize to playerAction;
-        // TODO: if moving set playerAction to RUNNING
-        // TODO: else set playerAction to IDLE
+        int startAni = playerAction;
+        if (moving) {
+            playerAction = RUNNING;
+        } else {
+            playerAction = IDLE;
+        }
 
-        // TODO: if attacking set playerAction to ATTACK_1;
-        // TODO: if startAni is not equal to playerAction call resetAniTick()
+        if (attacking) {
+            playerAction = ATTACK_1;
+        }
+
+        if (startAni != playerAction) {
+            resetAniTick();
+        }
     }
 
     private void resetAniTick(){
-        // TODO: set aniTick to 0;
-        // TODO: set aniIndex to 0;
+        aniTick = 0;
+        aniIndex = 0;
     }
 
     private void updatePos(){
-        // TODO: set moving to false
-        // TODO: if (left and not right)
-        // subtract playerSpeed from x
-        // set moving to true
-        // TODO: else if (right and not left)
-        // add playerSpeed to x
-        // set moving to true
-        // TODO: if up and not down
-        // subtract playerSpeed from y
-        // set moving to true
-        // TODO: if (down and not up)
-        // add playerSeed to y
-        // set moving to true
+        moving = false;
+        if (left && !right) {
+            x -= playerSpeed;
+            moving = true;
+        } else if (right = !left) {
+            x += playerSpeed;
+            moving = true;
+        }
+        if (up && !down) {
+            y -= playerSpeed;
+            moving = true;
+        }
+        if (down && !up){
+            y += playerSpeed;
+            moving = true;
+        }
+
     }
 
     private void loadAnimations() {
@@ -118,21 +135,46 @@ public class Player extends Entity {
     }
 
     public void resetDirBooleans(){
-        //TODO: set left, right, up and down to false
+        left = false;
+        right = false;
+        up = false;
+        down = false;
     }
 
     public void setAttacking(boolean attacking){
-        // TODO: set the attacking field to the attacking parameter.
+        this.attacking = attacking;
     }
 
     public boolean isLeft(){
-        // TODO: return the left fields value.
+        return left;
     }
 
     public void setLeft(boolean left){
-        // TODO: set the left field to the left parameter
+        this.left = left;
     }
 
-    // TODO: repeat is and set for Up, Down, and Right just like we did in the last 2 methods.
+    public boolean isUp(){
+        return up;
+    }
+
+    public void setUp(boolean up){
+        this.up = up;
+    }
+
+    public boolean isDown(){
+        return down;
+    }
+
+    public void setDown(boolean down){
+        this.down = down;
+    }
+
+    public boolean isRight(){
+        return right;
+    }
+
+    public void setRight(boolean right){
+        this.right = right;
+    }
 
 }
